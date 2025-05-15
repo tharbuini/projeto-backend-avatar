@@ -1,2 +1,4 @@
 # projeto-backend-avatar
-Projeto de aplicação backend que consome API da IA do Avatar.
+Construindo uma aplicação back-end utilizando o Python conectando com a API do Avatar.
+
+#7DaysOfCode
