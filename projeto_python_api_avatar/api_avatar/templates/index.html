@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personagens</title>
+</head>
+<body>
+    <h1>Personagens Traduzidos</h1>
+    <ul>
+        {% for personagem in personagens %}
+            <li>
+                Nome: {{ personagem.nome }}<br>
+                Afiliação: {{ personagem.afiliacao }}<br>
+                Aliados: {{ personagem.aliados|last}}<br>
+                Inimigos: {{ personagem.inimigos|last}}<br>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
