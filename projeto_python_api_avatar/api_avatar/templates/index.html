@@ -75,7 +75,7 @@
                             <img src="{{ personagem.photoUrl }}" class="card-img-top person-img" alt="Imagem de {{ personagem.nome }}">
                         {% endif %}
                         <div class="card-body">
-                            <h5 class="card-title">{{ personagem.nome }}</h5>
+                            <h5 class="card-title">{{ personagem.nome|upper }}</h5>
 
                             {# Detecta a afiliação e aplica uma classe de cor #}
                             {% if "água" in personagem.afiliacao|lower %}
