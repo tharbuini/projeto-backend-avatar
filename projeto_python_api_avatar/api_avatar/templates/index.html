@@ -68,7 +68,7 @@
         <h1>Personagens de Avatar</h1>
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
-            {% for personagem in personagens %}
+            {% for personagem in pagina_obj  %}
                 <div class="col">
                     <div class="card h-100">
                         {% if personagem.photoUrl %}
@@ -97,6 +97,49 @@
                     </div>
                 </div>
             {% endfor %}
+        </div>
+        <div class="d-flex justify-content-center mt-4">
+            <nav>
+                <ul class="pagination">
+                    {% if pagina_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1">Primeira</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ pagina_obj.previous_page_number }}">Anterior</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">Primeira</span>
+                        </li>
+                        <li class="page-item disabled">
+                            <span class="page-link">Anterior</span>
+                        </li>
+                    {% endif %}
+
+                    <li class="page-item disabled">
+                        <span class="page-link">
+                            Página {{ pagina_obj.number }} de {{ pagina_obj.paginator.num_pages }}
+                        </span>
+                    </li>
+
+                    {% if pagina_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ pagina_obj.next_page_number }}">Próxima</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ pagina_obj.paginator.num_pages }}">Última</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">Próxima</span>
+                        </li>
+                        <li class="page-item disabled">
+                            <span class="page-link">Última</span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
         </div>
     </div>
 

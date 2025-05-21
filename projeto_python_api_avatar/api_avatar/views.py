@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.core.paginator import Paginator
 import requests, json
 from googletrans import Translator
 
@@ -20,6 +21,8 @@ def personagens(request):
         else:
             personagem["afiliacao"] = "Desconhecida"
 
-    return render(request, "index.html", {'personagens': lista_personagens})
+    paginador = Paginator(lista_personagens, 9)
+    numero_pagina = request.GET.get("page")
+    pagina_obj = paginador.get_page(numero_pagina)
     
-    # JSON PURO -> return JsonResponse(personagens, safe=False, json_dumps_params={"ensure_ascii": False, "indent": 4})
+    return render(request, "index.html", {'pagina_obj': pagina_obj})
