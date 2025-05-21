@@ -10,25 +10,15 @@ def personagens(request):
     tradutor = Translator()
 
     for personagem in lista_personagens:
-        personagem["aliados"] = personagem.pop("allies")
-        personagem["inimigos"] = personagem.pop("enemies")
-        personagem["nome"] = personagem.pop("name")
-        
-        nome = personagem["nome"].strip()
-        personagem["nome"] = tradutor.translate(nome, src="en", dest="pt").text
-        aliados = personagem["aliados"]
-        personagem["aliados"] = [
-            tradutor.translate(aliado, src="en", dest="pt").text for aliado in aliados
-        ]
-        inimigos = personagem["inimigos"]
-        personagem["inimigos"] = [
-            tradutor.translate(inimigo, src="en", dest="pt").text for inimigo in inimigos
-        ]
-        
-        if ("affiliation" in personagem):
-            personagem["afiliacao"] = personagem.pop("affiliation")
-            afiliacao = personagem["afiliacao"].strip().lower()
-            personagem["afiliacao"] = tradutor.translate(afiliacao, src="en", dest="pt").text.capitalize()
+        personagem["aliados"] = personagem.pop("allies", [])
+        personagem["inimigos"] = personagem.pop("enemies", [])
+        personagem["nome"] = tradutor.translate(personagem.pop("name", ""), src="en", dest="pt").text
+        personagem["aliados"] = [tradutor.translate(a, src="en", dest="pt").text for a in personagem["aliados"]]
+        personagem["inimigos"] = [tradutor.translate(i, src="en", dest="pt").text for i in personagem["inimigos"]]
+        if "affiliation" in personagem:
+            personagem["afiliacao"] = tradutor.translate(personagem.pop("affiliation", ""), src="en", dest="pt").text.capitalize()
+        else:
+            personagem["afiliacao"] = "Desconhecida"
 
     return render(request, "index.html", {'personagens': lista_personagens})
     
